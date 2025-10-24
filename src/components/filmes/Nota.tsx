@@ -1,3 +1,5 @@
+'use client';
+
 import { StarIcon } from "@phosphor-icons/react";
 import Flex from "../template/Flex";
 import mergeClasses from "@/utils/mergeClasses";

@@ -1,7 +1,9 @@
+'use client';
 import Flex from "../template/Flex";
 import { useEffect, useState } from "react";
 import useMovieAPI from "@/hooks/useMovieAPI";
 import mergeClasses from "@/utils/mergeClasses";
+import Skeleton from "../template/skeleton";
 
 interface GenerosProps {
     idFilme: string;
@@ -10,7 +12,7 @@ interface GenerosProps {
 }
 
 export default function Generos({ idFilme, grande, generosPadrao }: GenerosProps) {
-    const [generos, setGeneros] = useState<Genero[]>([]);
+    const [generos, setGeneros] = useState<Genero[] | null>(null);
     const { getGenerosDoFilme } = useMovieAPI();
 
 
@@ -21,6 +23,18 @@ export default function Generos({ idFilme, grande, generosPadrao }: GenerosProps
         }
         getGenerosDoFilme(idFilme).then(setGeneros);
     }, [])
+
+    if (!generos) {
+        return (
+            <Flex className="flex-wrap justify-start">
+                {Array(4).fill(0).map((_, index) => {
+                    return (
+                        <Skeleton key={index} className="rounded-lg h-8 w-24" />
+                    )
+                })}
+            </Flex>
+        )
+    }
 
     return (
         <Flex className="flex-wrap justify-start">

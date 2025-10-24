@@ -21,7 +21,7 @@ function BotaoLateral(props: {
             onMouseEnter={props.onMouseEnter}
             onMouseLeave={props.onMouseLeave}
             className={mergeClasses(`
-            group absolute top-0 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none 
+            group absolute top-0 flex lg:h-full h-1/2 cursor-pointer items-center justify-center px-4 focus:outline-none 
          `, { "left-0": props.esquerda, "right-0": props.direita })}>
             <span className={`
                  inline-flex h-10 w-10 items-center justify-center rounded-full bg-gray-700/30 group-focus:outline-none 
@@ -90,7 +90,7 @@ export function Carrossel({ children, slideAutomatico }: CarrosselProps) {
 
     return (
         <Wrap className="relative">
-            <Container className="relative">
+            <Container className="relative w-5/6">
                 <Wrap>
                     <div className="relative rounded-lg mb-5"
                         ref={carrosselRef}

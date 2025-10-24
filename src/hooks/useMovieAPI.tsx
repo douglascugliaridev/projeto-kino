@@ -116,12 +116,28 @@ export default function useMovieAPI() {
         return json.profiles.map((imagem: any) => formartarImagemURL(imagem.file_path));
     }
 
+    async function getFilmesDoAtor(idAtor: string): Promise<Filme[]> {
+        const { json, status } = await get(`/person/${idAtor}/movie_credits`);
+        if (status !== 200) return [];
+        const resultados = Array.isArray(json?.cast) ? json.cast : [];
+        return resultados.slice(0, 9).map((filme: any) => ({
+            id: filme.id,
+            titulo: filme.title,
+            descricao: filme.overview,
+            dataDeLancamento: new Date(filme.release_date),
+            nota: filme.vote_average,
+            linkImagemFundo: formartarImagemURL(filme.backdrop_path),
+            linkImagemPoster: formartarImagemURL(filme.poster_path),
+        }));
+    }
+
     return {
         getUltimosFilmes,
         getGenerosDoFilme,
         getFilmeDetalhado,
         getFilmesRecomendados,
         getAtorDetalhado,
-        getImagensAtor
+        getImagensAtor,
+        getFilmesDoAtor
     }
 }
