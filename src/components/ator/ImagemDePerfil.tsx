@@ -1,3 +1,4 @@
+'use client';
 import { UserIcon } from "@phosphor-icons/react";
 import ImagemComFallback from "../template/ImagemComFallback";
 import Wrap from "../template/Wrap";
